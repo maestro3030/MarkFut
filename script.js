@@ -6,7 +6,7 @@
    reales desde tu API (fetch) cuando la tengas lista.
 ========================================================= */
 
-const COMP_LABEL = { laliga:'LaLiga', laliga2:'LaLiga2', primera:'Primera Federación' };
+const COMP_LABEL = { laliga:'LaLiga EA Sports', laliga2:'LaLiga Hypermotion' };
 
 // ---- Fichajes confirmados (mercado de verano 2026, ventana abierta 1 jul – 1 sep 2026) ----
 const TRANSFERS = [
@@ -24,14 +24,9 @@ const TRANSFERS = [
   {name:'Guido Rodríguez', symbol:'$GRODRI', pos:['MCD'], from:'Valencia CF', to:'Valencia CF', fee:'Renovación · 2028', date:'11 jul 2026', comp:'laliga2'},
   {name:'Bright Ede', symbol:'$BEDE', pos:['ED'], from:'Libre', to:'Deportivo de La Coruña', fee:'Libre', date:'24 jul 2026', comp:'laliga2'},
 
-  {name:'Íñigo Sáinz-Maza', symbol:'$SAINZM', pos:['MC'], from:'Racing de Santander (cantera)', to:'Real Unión', fee:'Cesión', date:'12 jul 2026', comp:'primera'},
-  {name:'Robert Ivanov', symbol:'$RIVAN', pos:['POR'], from:'Sestao River', to:'Bilbao Athletic', fee:'€0.2M', date:'30 jul 2026', comp:'primera'},
+  {name:'Diego Villares', symbol:'$VILLARES', pos:['MC'], from:'Deportivo de La Coruña', to:'Deportivo de La Coruña', fee:'Renovación', date:'05 jul 2026', comp:'laliga2'},
+  {name:'Sergio Arribas', symbol:'$ARRIBAS', pos:['MCO','DC'], from:'UD Almería', to:'UD Almería', fee:'Renovación', date:'14 jul 2026', comp:'laliga2'},
 ];
-
-// Nota: la Primera Federación 2026/27 se reorganiza con los descensos de Real Zaragoza,
-// Cultural Leonesa, SD Huesca y CD Mirandés desde LaLiga2, junto a filiales como
-// Real Madrid Castilla y FC Barcelona Atlètic. Sustituye este bloque por datos de tu
-// fuente/API cuando quieras fichajes reales de esta categoría.
 
 // ---- Rumores / fichajes inminentes ----
 const RUMORS = [
@@ -83,11 +78,13 @@ function generatedName(teamId, idx){
   return seededPick(s1, FIRST_NAMES)+' '+seededPick(s2, LAST_NAMES);
 }
 
-// ---- Equipos: LaLiga, LaLiga2, Primera Federación (destacados) ----
+// ---- Equipos: LaLiga EA Sports (20) y LaLiga Hypermotion (22) ----
 // Temporada 2026/27 — composición verificada: LaLiga incorpora a Racing de Santander,
 // Deportivo de La Coruña y Málaga CF (ascendidos); descienden Real Oviedo, RCD Mallorca
 // y Girona FC. LaLiga2 (Hypermotion) suma Girona, Mallorca y Oviedo, más los ascendidos
-// desde Primera Federación (Tenerife, Eldense, Sabadell, Celta Fortuna).
+// desde Primera Federación (Tenerife, Eldense, Sabadell, Celta Fortuna). La propia
+// Primera Federación ya no se muestra como competición en esta web (a petición del
+// cliente): solo se listan los 20 + 22 equipos de las dos categorías profesionales.
 const TEAM_LIST = [
   // LaLiga (20)
   {id:'rmadrid', name:'Real Madrid', comp:'laliga', formation:'4-3-3'},
@@ -133,27 +130,46 @@ const TEAM_LIST = [
   {id:'sporting', name:'Real Sporting de Gijón', comp:'laliga2', formation:'4-4-2'},
   {id:'valladolid', name:'Real Valladolid', comp:'laliga2', formation:'4-3-3'},
   {id:'tenerife', name:'CD Tenerife', comp:'laliga2', formation:'4-4-2'},
-  // Primera Federación (destacados — 3er nivel)
-  {id:'castilla', name:'Real Madrid Castilla', comp:'primera', formation:'4-3-3'},
-  {id:'barcaatl', name:'FC Barcelona Atlètic', comp:'primera', formation:'4-3-3'},
-  {id:'bilbaoath', name:'Bilbao Athletic', comp:'primera', formation:'4-2-3-1'},
-  {id:'realunion', name:'Real Unión', comp:'primera', formation:'4-4-2'},
-  {id:'zaragoza', name:'Real Zaragoza', comp:'primera', formation:'4-2-3-1'},
-  {id:'huesca', name:'SD Huesca', comp:'primera', formation:'4-3-3'},
-  {id:'cultural', name:'Cultural Leonesa', comp:'primera', formation:'4-4-2'},
-  {id:'mirandes', name:'CD Mirandés', comp:'primera', formation:'3-5-2'},
 ];
 
-// ---- Plantillas curadas para clubes destacados (verificadas a ago 2026; resto: generado) ----
-// Nota: se ha limitado la curación a los clubes con datos de fichajes/salidas confirmados
-// (p. ej. salida de Lewandowski y Araújo del Barça, llegada de Konaté al Real Madrid) para
-// evitar mostrar jugadores que ya no compiten en España. El resto de equipos usa nombres
-// generados de forma ilustrativa — sustitúyelos por tu API para plantillas 100% reales.
+// ---- Plantillas curadas — temporada 2026/27 ----
+// LaLiga EA Sports: los 20 equipos, investigados con fuentes actualizadas de agosto 2026
+// (fichajes de verano incluidos: Konaté al Madrid, Adeyemi al Barça, salida de Lewandowski
+// y cesión de Araújo al Liverpool, Hjulmand al Atlético, etc.)
+// LaLiga Hypermotion: 9 de los 22 equipos con plantilla real verificada; el resto usa
+// nombres generados de forma ilustrativa (ver generatedName) hasta conectar una API real.
 const CURATED_ROSTERS = {
+  // ---- LaLiga EA Sports (20/20) ----
   rmadrid: ['Thibaut Courtois','Dani Carvajal','Ibrahim Konaté','Dean Huijsen','Álvaro Carreras','Federico Valverde','Aurélien Tchouaméni','Jude Bellingham','Vinicius Jr','Kylian Mbappé','Franco Mastantuono'],
-  barca: ['Joan García','Alejandro Balde','Pau Cubarsí','Íñigo Martínez','Jules Koundé','Pedri','Frenkie de Jong','Dani Olmo','Raphinha','Karim Adeyemi','Lamine Yamal'],
-  atmadrid: ['Jan Oblak','Nahuel Molina','José María Giménez','Robin Le Normand','Javi Galán','Álex Baena','Morten Hjulmand','Koke','Rodrigo De Paul','Antoine Griezmann','Julián Álvarez'],
-  athletic: ['Unai Simón','Andoni Gorosabel','Dani Vivian','Aitor Paredes','Yuri Berchiche','Mikel Vesga','Óscar de Marcos','Oihan Sancet','Nico Williams','Robert Navarro','Gorka Guruzeta'],
+  barca: ['Joan García','Jules Koundé','Ronald Araújo','Pau Cubarsí','Álex Balde','Marc Casadó','Frenkie de Jong','Pedri','Karim Adeyemi','Ferran Torres','Lamine Yamal'],
+  atmadrid: ['Jan Oblak','Nahuel Molina','José María Giménez','Robin Le Normand','Alejandro Grimaldo','Morten Hjulmand','Koke','Álex Baena','Giuliano Simeone','Julián Álvarez','Alexander Sørloth'],
+  athletic: ['Unai Simón','Andoni Gorosabel','Dani Vivian','Aymeric Laporte','Yuri Berchiche','Mikel Vesga','Mikel Jauregizar','Oihan Sancet','Nico Williams','Iñaki Williams','Gorka Guruzeta'],
+  alaves: ['Antonio Sivera','Nahuel Tenaglia','Facundo Garcés','Nikola Maras','Jonny Otto','Ander Guevara','Antonio Blanco','Carles Aleñá','Abde Rebbach','Toni Martínez','Lucas Boyé'],
+  betis: ['Álvaro Valles','Héctor Bellerín','Marc Bartra','Natan','Junior Firpo','Marc Roca','Pablo Fornals','Isco','Antony','Abde Ezzalzouli','Cucho Hernández'],
+  celta: ['Iván Villar','Sergio Carreira','Carl Starfelt','Unai Núñez','Javi Galán','Damián Rodríguez','Ilaix Moriba','Iago Aspas','Williot Swedberg','Hugo Álvarez','Borja Iglesias'],
+  depor: ['Germán Parreño','Ximo Navarro','Dani Barcia','Arnau Comas','Giacomo Quagliata','José Ángel Jurado','Diego Villares','Mario Soriano','David Mella','Yeremay Hernández','Pierre-Emerick Aubameyang'],
+  elche: ['Matías Dituro','Buba Sangaré','Pedro Bigas','David Affengruber','Víctor Chust','Marc Aguado','Federico Redondo','Gonzalo Villar','Germán Valera','Lucas Cepeda','Rafa Mir'],
+  espanyol: ['Marko Dmitrovic','Rubén Sánchez','Leandro Cabrera','Pablo Ramón','Quilindschy Hartman','Pol Lozano','Gabriel Moscardó','Edu Expósito','Jofre Carreras','Javi Puado','Kike García'],
+  getafe: ['David Soria','Kiko Femenía','Djené','Abdel Abqar','Davinchi','Mario Martín','Yvan Neyou','Ramón Terrats','Christantus Uche','Borja Mayoral','Juanmi'],
+  levante: ['Pablo Campos','Víctor García','Adrián de la Fuente','Aïssa Mandi','Manu Sánchez','Oriol Rey','Kervin Arriaga','Carlos Álvarez','Roger Brugué','Iván Romero','Karl Etta Eyong'],
+  malaga: ['Alfonso Herrero','Diego Murillo','Einar Galilea','Ángel Recio','Álex Pastor','Juanpe Jiménez','Carlos Dotor','Rafa Rodríguez','David Larrubia','Julen Lobete','Chupe'],
+  osasuna: ['Sergio Herrera','Valentín Rosier','Alejandro Catena','Jorge Herrando','Abel Bretones','Lucas Torró','Jon Moncayola','Moi Gómez','Rubén García','Ante Budimir','Raúl García'],
+  rayo: ['Dani Cárdenas','Andrei Rațiu','Florian Lejeune','Luiz Felipe','Pep Chavarría','Óscar Valentín','Unai López','Isi Palazón','Jorge de Frutos','Fran Pérez','Sergio Camello'],
+  racing: ['Simon Eriksson','Jorge Salinas','Álvaro Mantilla','Manu Hernando','Íñigo Sainz-Maza','Gustavo Puerta','Sergio Canales','Iñigo Vicente','Andrés Martín','Asier Villalibre','Juan Carlos Arana'],
+  rsociedad: ['Álex Remiro','Álvaro Odriozola','Igor Zubeldia','Jon Pacheco','Aihen Muñoz','Jon Gorrotxategi','Beñat Turrientes','Carlos Soler','Takefusa Kubo','Ander Barrenetxea','Mikel Oyarzabal'],
+  sevilla: ['Odysseas Vlachodimos','Juanlu Sánchez','Kike Salas','Marcão','Gabriel Suazo','Lucien Agoumé','Djibril Sow','Joan Jordán','Rubén Vargas','Alfon González','Isaac Romero'],
+  valencia: ['Stole Dimitrievski','Dimitri Foulquier','Mouctar Diakhaby','César Tárrega','José Gayà','Pepelu','Javi Guerra','Luis Rioja','Arnaut Danjuma','Hugo Duro','Umar Sadiq'],
+  villarreal: ['Luiz Júnior','Santiago Mouriño','Renato Veiga','Pau Navarro','Carlos Romero','Santi Comesaña','Pape Gueye','Alberto Moleiro','Nicolás Pépé','Georges Mikautadze','Gerard Moreno'],
+  // ---- LaLiga Hypermotion (9/22 verificados; resto generado) ----
+  valladolid: ['Karl Hein','Iván Alejo','Javi Sánchez','Stanko Jurić','Iza Carcelén','Amath Ndiaye','Marcos André','Peter Federico','Chuki','Juanmi Latasa','Víctor Meseguer'],
+  rsociedadb: ['Alex Padrosa','Diego Gorosito','Mariezkurrena','Jon Karrikaburu','Aritz Arambarri','Beñat Yon','Gorosabel','Carrera','Dani Díaz','Amaiur Sarriegi','Iker Vicente'],
+  cordoba: ['Carlos Marín','Antonio Casas','Carlos Albarrán','Fer Guerrero','César Morgado','Dani Requena','Jacobo González','Christian Delgado','Adrián Fuentes','Adilson Mendes','Guillermo Fernández'],
+  cadiz: ['Alberto Varo','Iza Carcelén','Fali','Raúl Parra','Marco Moreno','Momo Mbaye','Brian Ocampo','Suso','Iuri Tabatadze','Moussa Diakité','Jonan Marí'],
+  sporting: ['Diego Mariño','Juan Otero','Enol Prendes','Nico Riestra','Amadou Coundoul','Alejandro Lozano','Jonathan Dubasin','Daniel Queipo','Alejandro Oyón','Andrés Ferrari','Guille Rosas'],
+  almeria: ['Fernando Martínez','Álex Centelles','Daijiro Chirino','Álex Muñoz','Marcos Luna','César de la Hoz','Curro Sánchez','Sergio Arribas','Largie Ramazani','Adrián Embarba','Léo Baptistão'],
+  mallorca: ['Leo Román','Pablo Maffeo','Antonio Raíllo','Martin Valjent','Johan Mojica','Sergi Darder','Manu Morlanes','Antonio Sánchez','Dani Rodríguez','Vedat Muriqi','Abdón Prats'],
+  oviedo: ['Aarón Escandell','Alberto Reina','Rahim Alhassan','David Costas','Ilyas Chaira','Colombatto','Sibo Kpindi','Alejandro Arribas','Salvi Vidal','Santi Cazorla','Ilzat Akhmetov'],
+  granada: ['Zidane Astralaga','Ricard Sánchez','Sergio Ruiz','Fran Petit','Diallo','Óscar Naasei','Pablo Trigueros','Álvaro Lama','Facundo Arnaiz','Pedro Alemañ','Jorge Pascual Medina'],
 };
 
 // asigna jugador+posición para un equipo, usando plantilla curada o generada
@@ -331,7 +347,7 @@ function renderRumors(){
 ========================================================= */
 let currentTeamId = null;
 function renderTeamPanel(){
-  const groups = ['laliga','laliga2','primera'];
+  const groups = ['laliga','laliga2'];
   const panel = document.getElementById('team-panel');
   panel.innerHTML = groups.map(g => `
     <div class="team-group-label">${COMP_LABEL[g]}</div>
