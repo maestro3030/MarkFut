@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leyendas — MARKFUT</title>
+<meta name="description" content="Los clubes más históricos de España y sus jugadores legendarios: trayectoria, títulos, estadísticas y las anécdotas que marcaron su leyenda.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23050708%22/><text x=%2250%25%22 y=%2262%25%22 font-size=%2255%22 fill=%22%2300f6ff%22 text-anchor=%22middle%22 font-family=%22monospace%22>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="mk">MARK</span><span class="fut">FUT</span></a>
+    <div class="navlinks">
+      <a href="fichajes.html">Fichajes</a>
+      <a href="rumores.html">Rumores</a>
+      <a href="alineaciones.html">Alineaciones</a>
+      <a href="leyendas.html">Leyendas</a>
+    </div>
+    <a href="buscador.html" class="nav-cta">Buscar jugador →</a>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="wrap" style="padding-top:32px;">
+    <a href="index.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--text-dim);">← Inicio</a>
+  </div>
+
+  <section id="leyendas-top" style="border-bottom:none;">
+    <div class="wrap">
+
+      <!-- VISTA 1: CLUBES HISTÓRICOS -->
+      <div class="view active" id="clubs-view">
+        <div class="eyebrow">Historia del fútbol español</div>
+        <h2 class="section-title">Leyendas</h2>
+        <p class="section-sub">Los clubes más históricos de España. Elige uno para ver a sus jugadores legendarios.</p>
+        <div class="club-grid" id="clubs-grid"></div>
+      </div>
+
+      <!-- VISTA 2: LEYENDAS DE UN CLUB -->
+      <div class="view" id="legends-view">
+        <button class="back-link" id="back-to-clubs">← Todos los clubes</button>
+        <div class="eyebrow" id="legends-eyebrow">Leyendas del club</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+          <div style="width:40px;" id="legends-club-shield"></div>
+          <h2 class="section-title" id="legends-club-name" style="margin-bottom:0;">—</h2>
+        </div>
+        <p class="section-sub">Jugadores legendarios de la historia del club. Elige uno para ver su ficha completa.</p>
+        <div class="legend-grid" id="legends-grid"></div>
+      </div>
+
+      <!-- VISTA 3: FICHA DEL JUGADOR -->
+      <div class="view" id="player-view">
+        <button class="back-link" id="back-to-legends">← Volver a las leyendas</button>
+
+        <div class="player-head">
+          <div class="player-avatar-wrap" id="player-avatar"></div>
+          <div class="player-head-info">
+            <div class="club-tag" id="player-club-tag">—</div>
+            <div class="player-name" id="player-name">—</div>
+            <div class="player-meta" id="player-meta"></div>
+          </div>
+        </div>
+
+        <div class="legend-block">
+          <div class="legend-block-title">1 · Trayectoria del jugador</div>
+          <div class="timeline" id="player-career"></div>
+        </div>
+
+        <div class="legend-block">
+          <div class="legend-block-title">2 · Trofeos conseguidos en el club</div>
+          <div class="trophy-list" id="player-trophies"></div>
+        </div>
+
+        <div class="legend-block">
+          <div class="legend-block-title" id="player-stats-label">3 · Estadísticas en el club</div>
+          <div class="stat-grid" id="player-stats"></div>
+        </div>
+
+        <div class="legend-block" style="margin-bottom:0;">
+          <div class="legend-block-title">4 · Dato o rumor histórico</div>
+          <div class="fact-card" id="player-fact"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo" style="font-size:18px;"><span class="mk">MARK</span><span class="fut">FUT</span></a>
+        <p class="footer-note" style="margin-top:14px;">MARKFUT muestra datos de ejemplo con fines de demostración de producto. Los escudos son formas originales generadas por código (no reproducen escudos reales) y los retratos son siluetas genéricas. Para valores, fichajes y alineaciones reales en tiempo real, conecta esta interfaz a una API de datos de fútbol.</p>
+      </div>
+      <div class="footer-links">
+        <a href="fichajes.html">Fichajes</a>
+        <a href="rumores.html">Rumores</a>
+        <a href="alineaciones.html">Alineaciones</a>
+        <a href="leyendas.html">Leyendas</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> MARKFUT — Mercado de fichajes del fútbol español</span>
+      <span class="live-dot"><span class="d"></span> DATOS SIMULADOS EN VIVO</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
